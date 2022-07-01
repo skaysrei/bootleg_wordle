@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 export default function RandWord() {
-  const axios = require('axios').default;
   const [output, setOutput] = useState();
 
   useEffect(()=> {
@@ -18,7 +17,9 @@ export default function RandWord() {
       }
     ).then(
       resp => { setOutput(resp.data)}
-    );
+    ).catch( err => {
+      console.log(err)
+    });
   }, [])
   
   return (
