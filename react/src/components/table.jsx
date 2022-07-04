@@ -2,7 +2,6 @@ import { React, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Item from '@mui/material/ListItem'
-import Attempt from './attempt'
 
 export default function Table() {
   useEffect(() => {
