@@ -1,10 +1,8 @@
-import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useState, useEffect } from 'react';
 
 export default function RandWord() {
-  const [output, setOutput] = useState();
-
+  const [secretWord, setWord] = useState()
   useEffect(()=> {
     axios.get(
       'https://random-word-api.herokuapp.com/word',
@@ -15,16 +13,16 @@ export default function RandWord() {
             lang : 'it'
           }
       }
-    ).then(
-      resp => { setOutput(resp.data)}
-    ).catch( err => {
+    )
+    .then(res => { 
+        const data = res.data;
+        setWord( data );
+      }
+    )
+    .catch( err => {
       console.log(err)
     });
-  }, [])
-  
-  return (
-    <div>
-      {output}
-    </div>
-  )
+    }, []);
+
+  return secretWord
 }

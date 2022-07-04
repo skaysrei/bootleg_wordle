@@ -1,43 +1,24 @@
 import './App.css';
 import Table from './components/table.jsx';
 import Keyboard from './components/keyboard.jsx';
-import RandWord from './components/randWord';
-import {React, useState, useEffect} from 'react';
+import RandWord from './components/lib/randWord';
+import { React } from 'react';
 
 
 function App() {
+  const secretWord = RandWord()
 
-  const axios = require('axios').default;
-  const [output, setOutput] = useState();
-
-  useEffect(()=> {
-    axios.get(
-      'https://random-word-api.herokuapp.com/word',
-      {
-        params:
-          { 
-            length : 5,
-            lang : 'it'
-          }
-      }
-    ).then(
-      resp => { setOutput(resp.data)}
-    );
-    console.log("Render Here")
-  }, [])
-
+  console.log(RandWord(()=> { return }))
   return (
     <div>
       <header className="App-header">
         <div>
           Random Word:
-          {output}
-          {/*<RandWord />*/}
+          {secretWord}
         </div>
         <Table />
         <Keyboard />
       </header>
-      
     </div>
   );
 }
