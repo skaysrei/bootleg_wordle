@@ -1,5 +1,5 @@
 import './App.css';
-import Grid from './components/grid.jsx';
+import Table from './components/table.jsx';
 import Keyboard from './components/keyboard.jsx';
 import RandWord from './components/randWord';
 import {React, useState, useEffect} from 'react';
@@ -34,9 +34,10 @@ function App() {
           {output}
           {/*<RandWord />*/}
         </div>
-        <Grid />
+        <Table />
         <Keyboard />
       </header>
+      
     </div>
   );
 }
