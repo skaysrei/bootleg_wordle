@@ -184,14 +184,14 @@ function handleKeypress(e) {
   let letter = e.key.toLowerCase()  // string
   let letterAscii = e.keyCode
   if (letterAscii === 8) {
-    if (!row.length)
-      return
-    popRowPushPapers()
+    if (row.length)
+      popRowPushPapers()
+    return
   }
   else if (letterAscii === 13) {
-    if (row.length !== 5)
-      return
-    submitRow()
+    if (row.length === 5)
+      submitRow()
+    return
   }
   else if (!isLetter(letterAscii)) {
     return
