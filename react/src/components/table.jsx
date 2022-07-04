@@ -1,13 +1,15 @@
 import { React, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import Item from '@mui/material/ListItem'
 
-let nextPaper = [0,0] // [0-5, 0-4]
+let papersStack = []
+let row = []  // for storing every word attempt
+const secretWord = ""
 
 export default function Table() {
   useEffect(() => {
-    document.addEventListener('keypress', handleKeypress)
+    _initPapersStack()
+    document.addEventListener('keydown', handleKeypress)
   }, [])
   return (
     <>
@@ -177,18 +179,80 @@ export default function Table() {
   )
 }
 
+// Keyboard buttons press handler
 function handleKeypress(e) {
   let letter = e.key.toLowerCase()  // string
-  if (!isLetter(letter))
+  let letterAscii = e.keyCode
+  if (letterAscii === 8) {
+    if (!row.length)
+      return
+    popRowPushPapers()
+  }
+  else if (letterAscii === 13) {
+    if (row.length !== 5)
+      return
+    submitRow()
+  }
+  else if (!isLetter(letterAscii)) {
     return
-  insertIntoTable(letter)
-
+  }
+  papersStackPush(letter)
+  if (!papersStack.length)
+    document.removeEventListener("keydown", handleKeypress)
 }
 
-function isLetter(letter) {
-  return letter !== letter.toUpperCase()
+function popRowPushPapers() {
+  let latestPaper = row.pop()
+  latestPaper.textContent = "ㅤ"
+  papersStack.push(latestPaper)
 }
 
-function insertIntoTable(letter) {
+function submitRow() {
+  let attemptedWord = row.map( paper => paper.textContent)
+  let lettersScores = []
+  for (let char of attemptedWord) {
+    compareLetter(char, lettersScores)
+  }
+  for (let i = 0; i < 5; ++i) {
+    row.pop()
+  }
+}
+
+function compareLetter(attemptedWord, lettersScores) {
+  let score = 0
   
+}
+
+function popPapersPushRow() {
+  let newPaper = papersStack.pop()
+  row.push(newPaper)
+}
+
+// Check if given character is from A-Z (ascii is always counted as uppercase somehow)
+function isLetter(letterAscii) {
+  console.log(letterAscii)
+  if (!(letterAscii >= 65 && letterAscii <= 90))
+    return false
+  return true
+}
+
+// Change the current 'Paper' value into the given letter from user
+function papersStackPush(letter) {
+  if (row.length >= 5) {
+    console.log("The row is filled already! Submit it or delete from it")
+    return
+  }
+  console.log("Pressed = ", letter)
+  let currentPaper = papersStack.at(-1)
+  currentPaper.textContent = letter
+  popPapersPushRow()
+}
+
+// Fill the papers stack with the DOM-generated 'Paper' components
+function _initPapersStack() {
+  papersStack = [
+    ...document.getElementsByClassName(
+    "MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root"
+    )
+  ].reverse()
 }
