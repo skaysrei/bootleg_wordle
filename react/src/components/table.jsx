@@ -1,10 +1,11 @@
 import { React, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
+import RandWord from './lib/randWord'
 
 let papersStack = []
 let row = []  // for storing every word attempt
-const secretWord = ""
+const secretWord = RandWord()
 
 export default function Table() {
   useEffect(() => {
@@ -209,18 +210,25 @@ function popRowPushPapers() {
 
 function submitRow() {
   let attemptedWord = row.map( paper => paper.textContent)
-  let lettersScores = []
-  for (let char of attemptedWord) {
-    compareLetter(char, lettersScores)
+  let lettersScores = Array(5)
+  console.log(lettersScores)
+  for (const [idx, char] of attemptedWord.entries()) {
+    compareLetter(char, idx, lettersScores)
   }
+  console.log(lettersScores)
   for (let i = 0; i < 5; ++i) {
     row.pop()
   }
 }
 
-function compareLetter(attemptedWord, lettersScores) {
+function compareLetter(char, idx, lettersScores) {
   let score = 0
-  
+    if (char in secretWord) {
+      score++
+      if (char === secretWord[idx])
+        score++
+    }
+  lettersScores[idx] = score
 }
 
 function popPapersPushRow() {
