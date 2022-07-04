@@ -2,23 +2,23 @@ import './App.css';
 import Table from './components/table.jsx';
 import Keyboard from './components/keyboard.jsx';
 import RandWord from './components/lib/randWord';
-import {React, useState, useEffect} from 'react';
+import { React } from 'react';
 
 
 function App() {
+  const secretWord = RandWord()
 
+  console.log(RandWord(()=> { return }))
   return (
     <div>
       <header className="App-header">
         <div>
           Random Word:
-          {RandWord(console.log)}
-          {/*<RandWord />*/}
+          {secretWord}
         </div>
         <Table />
         <Keyboard />
       </header>
-      
     </div>
   );
 }
