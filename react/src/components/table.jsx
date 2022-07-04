@@ -1,36 +1,25 @@
-import React from 'react'
+import { React, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
+import Item from '@mui/material/ListItem'
+import Attempt from './attempt'
 
 export default function Table() {
+  useEffect(() => {
+    document.addEventListener('keypress', handleKeypress)
+  }, [])
   return (
     <>
-      <Grid container>
-        <Grid item>
-          <Paper>
-            1
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper>
-            2
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper>
-            3
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper>
-            4
-          </Paper>
-        </Grid><Grid item>
-          <Paper>
-            5
-          </Paper>
-        </Grid>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 20 }}>
+      {Array.from(Array(30)).map((_, index) => (
+        <Attempt />
+      ))}
       </Grid>
     </>
   )
+}
+
+function handleKeypress(e) {
+  
+  console.log("Premuto ", e.key)
 }
