@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useFetchWord = () => {
-    const [data, setData] = useState({});
+    const [word, setWord] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchWord = async () => {
             try {
-                const { data: word } = await axios.get(
+                const { data: response } = await axios.get(
                     'https://random-word-api.herokuapp.com/word',
                     {
                         params:
@@ -18,7 +18,7 @@ const useFetchWord = () => {
                         }
                     }
                 );
-                setData(word);
+                setWord(response[0]);
             } catch (error) {
                 console.log(error);
             }
@@ -28,7 +28,7 @@ const useFetchWord = () => {
         fetchWord();
     }, []);
 
-  return { data, loading};
-}
+  return { word, loading };
+};
 
 export default useFetchWord;

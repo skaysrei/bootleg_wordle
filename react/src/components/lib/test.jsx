@@ -1,18 +1,14 @@
-import {React, useState } from 'react'
+import { React } from 'react'
 import useFetchWord from './useFetchWord'
 
 const Test = () => {
-    const InitWord = () => {
-        const { word, loading } = useFetchWord();
-        return { word, loading };
-    }
-    const [word, setWord] = useState(InitWord);
+    const { word, loading } = useFetchWord();
 
     return (
         <>
-            <div conatiner>
-                <h2>{word}</h2>
-                <button onClick={setWord(InitWord)}>Nuova Parola</button>
+            <div>
+                <h2>WORD: {word}</h2>
+                <h2>IS LOADING: {loading.toString()}</h2>
             </div>
         </>
     )

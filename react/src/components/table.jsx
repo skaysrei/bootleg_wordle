@@ -1,7 +1,8 @@
 import { React, useEffect } from 'react'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import axios from 'axios'
+import useFetchWord from './lib/useFetchWord.jsx'
+/* import axios from 'axios' */
 import './table.css'
 
 let papersStack = []
@@ -9,20 +10,15 @@ let row = []  // for storing every word attempt
 
 
 export default function Table() {
+  const word = useFetchWord()["word"];
+
+  sessionStorage.setItem("secretWord", word)
+
   useEffect(() => {
-    axios.get('https://random-word-api.herokuapp.com/word', {
-        params: { 
-            length : 5,
-            lang : 'it'
-          }
-      }).then(resp => {
-        sessionStorage.setItem("secretWord", resp.data)
-      }).catch( err => {
-      console.log(err)
-    })
     _initPapersStack()
     document.addEventListener('keydown', handleKeypress)
   }, [])
+
   return (
     <>
       <Grid columns={50} sx={{ width: '40%' }} container>
@@ -225,7 +221,6 @@ function submitRow() {
     document.removeEventListener("keydown", handleKeypress)
   let attemptedWord = row.map( paper => paper.textContent)
   let lettersScores = Array(5)
-  console.log(lettersScores)
   for (const [idx, char] of attemptedWord.entries()) {
     compareLetter(char, idx, lettersScores)
   }
@@ -275,7 +270,6 @@ function popPapersPushRow() {
 
 /** Check if given character is from A-Z (ascii is always counted as uppercase somehow) */
 function isLetter(letterAscii) {
-  console.log(letterAscii)
   if (!(letterAscii >= 65 && letterAscii <= 90))
     return false
   return true
@@ -285,10 +279,8 @@ function isLetter(letterAscii) {
 function papersStackPush(letter) {
   
   if (row.length >= 5) {
-    console.log("The row is filled already! Submit it or delete from it")
     return
   }
-  console.log("Pressed = ", letter)
   let currentPaper = papersStack.at(-1)
   currentPaper.textContent = letter
   popPapersPushRow()
