@@ -1,14 +1,24 @@
 import { React, useEffect } from 'react'
-import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import RandWord from './lib/randWord'
+import Grid from '@mui/material/Grid'
+import axios from 'axios'
 
 let papersStack = []
 let row = []  // for storing every word attempt
-const secretWord = RandWord()
+
 
 export default function Table() {
   useEffect(() => {
+    axios.get('https://random-word-api.herokuapp.com/word', {
+        params: { 
+            length : 5,
+            lang : 'it'
+          }
+      }).then(resp => {
+        sessionStorage.setItem("secretWord", resp.data)
+      }).catch( err => {
+      console.log(err)
+    })
     _initPapersStack()
     document.addEventListener('keydown', handleKeypress)
   }, [])
@@ -176,6 +186,7 @@ export default function Table() {
           </Paper>
         </Grid>
       </Grid>
+      <button id="Mybtn" onClick={ () => {document.querySelector("#Mybtn").textContent = sessionStorage.secretWord}}>Ciao</button>
     </>
   )
 }
@@ -223,6 +234,7 @@ function submitRow() {
 
 function compareLetter(char, idx, lettersScores) {
   let score = 0
+  let secretWord = sessionStorage.secretWord
     if (char in secretWord) {
       score++
       if (char === secretWord[idx])
