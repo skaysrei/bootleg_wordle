@@ -210,8 +210,6 @@ function handleKeypress(e) {
     return
   }
   papersStackPush(letter)
-  if (!papersStack.length)
-    document.removeEventListener("keydown", handleKeypress)
 }
 
 /** Pop Paper from row[] and push it back to paperStack[] */
@@ -223,6 +221,8 @@ function popRowPushPapers() {
 
 /** Submit the user word attempt */
 function submitRow() {
+  if (!papersStack.length)
+    document.removeEventListener("keydown", handleKeypress)
   let attemptedWord = row.map( paper => paper.textContent)
   let lettersScores = Array(5)
   console.log(lettersScores)
@@ -283,6 +283,7 @@ function isLetter(letterAscii) {
 
 /** Change the current 'Paper' value into the given letter from user */
 function papersStackPush(letter) {
+  
   if (row.length >= 5) {
     console.log("The row is filled already! Submit it or delete from it")
     return
