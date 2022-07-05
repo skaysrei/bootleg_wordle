@@ -191,7 +191,7 @@ export default function Table() {
   )
 }
 
-// Keyboard buttons press handler
+/** Keyboard buttons press handler */
 function handleKeypress(e) {
   let letter = e.key.toLowerCase()  // string
   let letterAscii = e.keyCode
@@ -213,12 +213,14 @@ function handleKeypress(e) {
     document.removeEventListener("keydown", handleKeypress)
 }
 
+/** Pop Paper from row[] and push it back to paperStack[] */
 function popRowPushPapers() {
   let latestPaper = row.pop()
   latestPaper.textContent = "ㅤ"
   papersStack.push(latestPaper)
 }
 
+/** Submit the user word attempt */
 function submitRow() {
   let attemptedWord = row.map( paper => paper.textContent)
   let lettersScores = Array(5)
@@ -232,6 +234,7 @@ function submitRow() {
   }
 }
 
+/** Check char by char and assign score based on presence & position in the solution */
 function compareLetter(char, idx, lettersScores) {
   let score = 0
   let secretWord = sessionStorage.secretWord
@@ -243,6 +246,11 @@ function compareLetter(char, idx, lettersScores) {
   lettersScores[idx] = score
 }
 
+/**
+ * Change colors of Papers in DOM based on the score given
+ * 1: yellow (letter is in the string but in a different position)
+ * 2: green (letter is correct)
+ */
 function markLetters(lettersScores) {
   for (const [idx, score] of lettersScores.entries()) {
     switch (score) {
@@ -258,12 +266,13 @@ function markLetters(lettersScores) {
   }
 }
 
+/* Pop Paper from paperStack[] and push it to row[] */
 function popPapersPushRow() {
   let newPaper = papersStack.pop()
   row.push(newPaper)
 }
 
-// Check if given character is from A-Z (ascii is always counted as uppercase somehow)
+/** Check if given character is from A-Z (ascii is always counted as uppercase somehow) */
 function isLetter(letterAscii) {
   console.log(letterAscii)
   if (!(letterAscii >= 65 && letterAscii <= 90))
@@ -271,7 +280,7 @@ function isLetter(letterAscii) {
   return true
 }
 
-// Change the current 'Paper' value into the given letter from user
+/** Change the current 'Paper' value into the given letter from user */
 function papersStackPush(letter) {
   if (row.length >= 5) {
     console.log("The row is filled already! Submit it or delete from it")
@@ -283,7 +292,7 @@ function papersStackPush(letter) {
   popPapersPushRow()
 }
 
-// Fill the papers stack with the DOM-generated 'Paper' components
+/** Fill the papers stack with the DOM-generated 'Paper' components */
 function _initPapersStack() {
   papersStack = [
     ...document.getElementsByClassName(
