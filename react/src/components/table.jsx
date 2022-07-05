@@ -21,6 +21,7 @@ export default function Table() {
 
   return (
     <>
+      <h1>Parol.</h1>
       <Grid columns={24} container spacing={1}>
         <Grid item>
           <Paper id={0-0}>
