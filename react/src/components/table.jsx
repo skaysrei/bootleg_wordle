@@ -226,7 +226,7 @@ function submitRow() {
   for (const [idx, char] of attemptedWord.entries()) {
     compareLetter(char, idx, lettersScores)
   }
-  console.log(lettersScores)
+  markLetters(lettersScores)
   for (let i = 0; i < 5; ++i) {
     row.pop()
   }
@@ -235,12 +235,27 @@ function submitRow() {
 function compareLetter(char, idx, lettersScores) {
   let score = 0
   let secretWord = sessionStorage.secretWord
-    if (char in secretWord) {
+    if (secretWord.includes(char)) {
       score++
       if (char === secretWord[idx])
         score++
     }
   lettersScores[idx] = score
+}
+
+function markLetters(lettersScores) {
+  for (const [idx, score] of lettersScores.entries()) {
+    switch (score) {
+      case 2:
+        row[idx].style.backgroundColor = "#66CC00"
+        break
+      case 1:
+        row[idx].style.backgroundColor = "#FFCC00"
+        break
+      default:
+        break
+    }
+  }
 }
 
 function popPapersPushRow() {
