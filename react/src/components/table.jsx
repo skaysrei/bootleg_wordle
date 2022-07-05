@@ -217,10 +217,15 @@ function popRowPushPapers() {
 
 /** Submit the user word attempt */
 function submitRow() {
-  let attemptedWord = row.map( paper => paper.textContent)
-  let lettersScores = Array(5)
+  let attemptedWord = row.map(paper => paper.textContent)
+  let lettersScores = Array(5).fill(0)
+  let secretWord = sessionStorage.secretWord
+  secretWord = Array.from(secretWord)
   for (const [idx, char] of attemptedWord.entries()) {
-    compareLetter(char, idx, lettersScores)
+    compareLetter(idx, char, lettersScores, secretWord)
+  }
+  for (const [idx, char] of attemptedWord.entries()) {
+    searchLetter(idx, char, lettersScores, secretWord)
   }
   markLetters(lettersScores)
   winOrLoss(lettersScores)
@@ -230,15 +235,22 @@ function submitRow() {
 }
 
 /** Check char by char and assign score based on presence & position in the solution */
-function compareLetter(char, idx, lettersScores) {
-  let score = 0
-  let secretWord = sessionStorage.secretWord
-    if (secretWord.includes(char)) {
-      score++
-      if (char === secretWord[idx])
-        score++
-    }
-  lettersScores[idx] = score
+function compareLetter(idx, char, lettersScores, secretWord) {
+  if (char === secretWord[idx]) {
+    lettersScores[idx] = 2
+    secretWord[idx] = -1
+  }
+}
+
+function searchLetter(idx, char, lettersScores, secretWord) {
+  if (lettersScores[idx] === 2)
+    return
+  if (secretWord.includes(char)) {
+    lettersScores[idx] = 1
+    let idxSecretChar = secretWord.indexOf(char)
+    console.log(idxSecretChar)
+    secretWord[idxSecretChar] = 0
+  }
 }
 
 /**
@@ -261,8 +273,8 @@ function markLetters(lettersScores) {
   }
 }
 
-function winOrLoss(lettersScore) {
-  if (lettersScore.every(val => val === 2)) {
+function winOrLoss(lettersScores) {
+  if (lettersScores.every(val => val === 2)) {
     console.log("Hai vinto")
     document.removeEventListener("keydown", handleKeypress)
     // TODO: add winning popup
