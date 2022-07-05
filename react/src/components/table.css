@@ -1,15 +1,16 @@
+.css-a5rdam-MuiGrid-root{
+    display: flex;
+    justify-content: center;
+}
+
 .css-1ps6pg7-MuiPaper-root{
     height: 70px;
     width: 70px;
-    margin: 10px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 40px;
     text-transform: uppercase
 }
-
-.css-glguxp-MuiGrid-root{
-    display: flex;
-    justify-content: center;
-}
+    

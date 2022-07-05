@@ -5,9 +5,9 @@ import useFetchWord from './lib/useFetchWord.jsx'
 /* import axios from 'axios' */
 import './table.css'
 
+
 let papersStack = []
 let row = []  // for storing every word attempt
-
 
 export default function Table() {
   const word = useFetchWord()["word"];
@@ -21,163 +21,164 @@ export default function Table() {
 
   return (
     <>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <h1>Parol.</h1>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={0-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={0-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={0-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={0-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={0-4}>
             
           </Paper>
         </Grid>
       </Grid>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={1-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={1-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={1-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={1-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={1-4}>
             
           </Paper>
         </Grid>
       </Grid>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={2-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={2-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={2-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={2-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={2-4}>
             
           </Paper>
         </Grid>
       </Grid>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={3-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={3-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={3-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={3-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={3-4}>
             
           </Paper>
         </Grid>
       </Grid>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={4-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={4-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={4-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={4-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={4-4}>
             
           </Paper>
         </Grid>
       </Grid>
-      <Grid columns={50} sx={{ width: '40%' }} container>
-        <Grid xs={5} item>
+      <Grid columns={24} container spacing={1}>
+        <Grid item>
           <Paper id={5-0}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={5-1}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={5-2}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={5-3}>
             
           </Paper>
         </Grid>
-        <Grid xs={5} item>
+        <Grid item>
           <Paper id={5-4}>
             
           </Paper>
