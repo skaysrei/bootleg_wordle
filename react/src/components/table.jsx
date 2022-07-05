@@ -183,7 +183,6 @@ export default function Table() {
           </Paper>
         </Grid>
       </Grid>
-      <button id="Mybtn" onClick={ () => {document.querySelector("#Mybtn").textContent = sessionStorage.secretWord}}>Ciao</button>
     </>
   )
 }
