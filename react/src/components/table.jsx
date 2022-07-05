@@ -216,14 +216,13 @@ function popRowPushPapers() {
 
 /** Submit the user word attempt */
 function submitRow() {
-  if (!papersStack.length)
-    document.removeEventListener("keydown", handleKeypress)
   let attemptedWord = row.map( paper => paper.textContent)
   let lettersScores = Array(5)
   for (const [idx, char] of attemptedWord.entries()) {
     compareLetter(char, idx, lettersScores)
   }
   markLetters(lettersScores)
+  winOrLoss(lettersScores)
   for (let i = 0; i < 5; ++i) {
     row.pop()
   }
@@ -261,6 +260,24 @@ function markLetters(lettersScores) {
   }
 }
 
+function winOrLoss(lettersScore) {
+  if (lettersScore.every(val => val === 2)) {
+    console.log("Hai vinto")
+    document.removeEventListener("keydown", handleKeypress)
+    // TODO: add winning popup
+  } else if (!papersStack.length) {
+    redRow()
+    console.log("Hai perso")
+    // TODO: add losing popup
+  }
+}
+
+function redRow() {
+  for (const paper of row) {
+    paper.style.backgroundColor = "#FF0000"
+  }
+}
+
 /* Pop Paper from paperStack[] and push it to row[] */
 function popPapersPushRow() {
   let newPaper = papersStack.pop()
@@ -276,7 +293,6 @@ function isLetter(letterAscii) {
 
 /** Change the current 'Paper' value into the given letter from user */
 function papersStackPush(letter) {
-  
   if (row.length >= 5) {
     return
   }
