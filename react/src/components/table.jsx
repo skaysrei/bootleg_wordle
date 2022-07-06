@@ -1,6 +1,7 @@
 import { React, useEffect } from 'react'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
+import Popup from './popup.jsx'
 import useFetchWord from './lib/useFetchWord.jsx'
 /* import axios from 'axios' */
 import './table.css'
@@ -8,6 +9,9 @@ import './table.css'
 
 let papersStack = []
 let row = []  // for storing every word attempt
+
+let trigger = false;
+let gametime = '00:00';
 
 export default function Table() {
   const word = useFetchWord()["word"];
@@ -184,6 +188,7 @@ export default function Table() {
           </Paper>
         </Grid>
       </Grid>
+      <Popup open={trigger} word={word} gametime={gametime}/>
     </>
   )
 }
@@ -228,7 +233,9 @@ function submitRow() {
     searchLetter(idx, char, lettersScores, secretWord)
   }
   markLetters(lettersScores)
-  winOrLoss(lettersScores)
+  trigger = winOrLoss(lettersScores)
+  alert(trigger)
+
   for (let i = 0; i < 5; ++i) {
     row.pop()
   }
@@ -283,6 +290,10 @@ function winOrLoss(lettersScores) {
     console.log("Hai perso")
     // TODO: add losing popup
   }
+  trigger=true
+  gametime='00:00'
+
+  return trigger
 }
 
 function redRow() {

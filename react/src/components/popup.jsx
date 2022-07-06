@@ -17,13 +17,16 @@ const style = {
   };
 
 const Popup = (props) => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+  if (props.open) {
+    handleOpen()
+  }
 
   return (
     <>
-        <Button onClick={handleOpen}>Show Scoreboard</Button>
         <Modal
         open={open}
         onClose={handleClose}
